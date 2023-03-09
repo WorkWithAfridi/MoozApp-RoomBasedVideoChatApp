@@ -47,6 +47,12 @@ class Homeframe extends StatelessWidget {
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(
+            Icons.add,
+          ),
+        ),
         body: SizedBox(
           height: getHeight(
             context: context,

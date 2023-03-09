@@ -12,12 +12,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthIdle()) {
     signin();
     checkUserStatus();
+    signout();
   }
 
   void signin() {
     return on<AuthSignin>(
       (event, emit) async {
-        emit(AuthLoading());
+        emit(
+          AuthLoading(),
+        );
         await Future.delayed(const Duration(seconds: 1));
         UserModel? userModel = await Authentication().signInWithGoogle();
         log("User model : $userModel");
@@ -53,6 +56,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             Unauthenticated(),
           );
         }
+      },
+    );
+  }
+
+  void signout() {
+    return on<AuthSignout>(
+      (event, emit) async {
+        emit(
+          AuthLoading(
+            user: event.userModel,
+          ),
+        );
+        await Future.delayed(const Duration(seconds: 1));
+        await Authentication().signout();
+        emit(
+          Unauthenticated(),
+        );
       },
     );
   }

@@ -13,7 +13,9 @@ abstract class AuthState extends Equatable {
 
 class AuthIdle extends AuthState {}
 
-class AuthLoading extends AuthState {}
+class AuthLoading extends AuthState {
+  AuthLoading({super.user,});
+}
 
 class Authenticated extends AuthState {
   Authenticated({required super.user});

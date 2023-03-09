@@ -47,4 +47,8 @@ class Authentication {
     }
     return null;
   }
+
+  Future<void> signout() async {
+    await _auth.signOut();
+  }
 }

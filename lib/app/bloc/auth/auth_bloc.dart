@@ -11,6 +11,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthIdle()) {
     signin();
+    checkUserStatus();
   }
 
   void signin() {
@@ -31,6 +32,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             AuthError(
               errorMessage: "An error occurred trying to log you in!",
             ),
+          );
+        }
+      },
+    );
+  }
+
+  void checkUserStatus() {
+    return on<AuthCheckUserStatus>(
+      (event, emit) async {
+        UserModel? userModel = await Authentication().isUserSignedIn();
+        if (userModel != null) {
+          emit(
+            Authenticated(
+              user: userModel,
+            ),
+          );
+        } else {
+          emit(
+            Unauthenticated(),
           );
         }
       },

@@ -19,6 +19,8 @@ class Authenticated extends AuthState {
   Authenticated({required super.user});
 }
 
+class Unauthenticated extends AuthState {}
+
 class AuthError extends AuthState {
   String errorMessage;
   AuthError({

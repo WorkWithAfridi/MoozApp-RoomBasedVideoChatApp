@@ -9,4 +9,5 @@ abstract class AuthEvent extends Equatable {
 }
 
 class AuthSignin extends AuthEvent {}
+class AuthCheckUserStatus extends AuthEvent {}
 

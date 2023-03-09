@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "182625859529",
+    "project_id": "mooz-f3c95",
+    "storage_bucket": "mooz-f3c95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182625859529:android:bc0e6ed57a672f68731a18",
+        "android_client_info": {
+          "package_name": "com.workwithafridi.mooz.mooz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182625859529-8f69cqj9ifq1103b6qqg6r3prlnu19sk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.workwithafridi.mooz.mooz",
+            "certificate_hash": "facd2f33cb6c3acb062019156407b73096428ea8"
+          }
+        },
+        {
+          "client_id": "182625859529-fkp4u1u0ek3s99d66lh4hu28739rh7im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApmibnRjHUKqZQa1dMZ1682R3GzaB4U3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182625859529-fkp4u1u0ek3s99d66lh4hu28739rh7im.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182625859529-tosf9gmq3ihn2m6c4ulmo9v83n7u69nf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.workwithafridi.mooz.mooz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

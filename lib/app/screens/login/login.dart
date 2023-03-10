@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mooz/app/bloc/auth/auth_bloc.dart';
+import 'package:mooz/app/screens/home/homeframe.dart';
 import 'package:mooz/app/shared/widgets/snackbar.dart';
 import 'package:mooz/app/utils/dimentions.dart';
 
@@ -10,14 +11,19 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
+      listener: (authContext, state) {
         if (state is AuthError) {
           showSnackbar(
             context: context,
             message: state.errorMessage,
           );
         } else if (state is Authenticated) {
-          Navigator.pushReplacementNamed(context, '/homeframe');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Homeframe(),
+            ),
+          );
         }
       },
       child: Scaffold(

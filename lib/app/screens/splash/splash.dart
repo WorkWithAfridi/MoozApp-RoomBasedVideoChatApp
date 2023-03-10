@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mooz/app/bloc/auth/auth_bloc.dart';
+import 'package:mooz/app/screens/home/homeframe.dart';
+import 'package:mooz/app/screens/login/login.dart';
 import 'package:mooz/app/utils/dimentions.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -18,11 +20,17 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     triggerSplashScreen(context: context);
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
+      listener: (authContext, state) {
         if (state is Unauthenticated) {
-          Navigator.of(context).pushReplacementNamed('/login');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+          );
         } else if (state is Authenticated) {
-          Navigator.of(context).pushReplacementNamed('/homeframe');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) =>  Homeframe()),
+          );
         }
       },
       child: Scaffold(

@@ -147,6 +147,9 @@ class Homeframe extends StatelessWidget {
                                   RoomModel roomModel = RoomModel.fromMap(
                                     snapshot.data!.docs[index].data(),
                                   );
+                                  if (roomModel.activeUsers.isEmpty) {
+                                    return const SizedBox.shrink();
+                                  }
                                   return RoomCard(roomModel: roomModel);
                                 },
                               ),

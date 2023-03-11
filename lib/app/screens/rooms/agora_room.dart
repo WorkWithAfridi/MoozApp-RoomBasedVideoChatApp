@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mooz/app/model/room.dart';
@@ -8,6 +9,7 @@ import 'package:mooz/app/utils/dimentions.dart';
 import '../../bloc/agora/agora_bloc.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../shared/widgets/snackbar.dart';
+import '../../utils/agora_settings.dart';
 
 class AgoraRoom extends StatefulWidget {
   AgoraRoom({
@@ -26,6 +28,8 @@ class _AgoraRoomState extends State<AgoraRoom> {
 
   late AgoraBloc agoraBloc;
 
+  late AgoraClient agoraClient;
+
   @override
   void dispose() {
     if (agoraBloc.state is AgoraSuccess) {
@@ -39,11 +43,24 @@ class _AgoraRoomState extends State<AgoraRoom> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    authBloc = context.read<AuthBloc>();
+    agoraBloc = context.read<AgoraBloc>();
+    agoraClient = AgoraClient(
+      agoraConnectionData: AgoraConnectionData(
+        appId: appId,
+        channelName: channgeId,
+        tempToken: token,
+      ),
+    );
+    agoraClient.initialize();
+  }
+
   // @override
   @override
   Widget build(BuildContext context) {
-    authBloc = context.read<AuthBloc>();
-    agoraBloc = context.read<AgoraBloc>();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -88,6 +105,24 @@ class _AgoraRoomState extends State<AgoraRoom> {
           child: Stack(
             alignment: Alignment.center,
             children: [
+              SizedBox(
+                height: getHeight(context: context),
+                width: getWidth(context: context),
+                child: AgoraVideoViewer(
+                  layoutType: Layout.oneToOne,
+                  client: agoraClient,
+                ),
+              ),
+              AgoraVideoButtons(
+                client: agoraClient,
+                enabledButtons: const [
+                  BuiltInButtons.callEnd,
+                  BuiltInButtons.toggleMic,
+                  BuiltInButtons.switchCamera,
+                  BuiltInButtons.toggleCamera,
+                  BuiltInButtons.screenSharing,
+                ],
+              ),
               Builder(
                 builder: (context) {
                   final agoraState = context.watch<AgoraBloc>().state;

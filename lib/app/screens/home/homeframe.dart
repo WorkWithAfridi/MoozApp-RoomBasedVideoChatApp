@@ -9,6 +9,7 @@ import 'package:mooz/app/screens/rooms/agora_room.dart';
 import 'package:mooz/app/services/firebase.dart';
 import 'package:mooz/app/shared/widgets/snackbar.dart';
 import 'package:mooz/app/utils/dimentions.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Homeframe extends StatelessWidget {
   Homeframe({super.key});
@@ -84,6 +85,7 @@ class Homeframe extends StatelessWidget {
           BlocListener<AgoraBloc, AgoraState>(
             listener: (agoraContext, state) {
               if (state is AgoraSuccess) {
+                [Permission.camera, Permission.microphone].request();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

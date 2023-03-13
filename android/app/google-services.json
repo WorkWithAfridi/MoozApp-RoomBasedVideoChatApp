@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "182625859529-o83785f33gsb3mapbg2glbo749p1ri35.apps.googleusercontent.com",
+          "client_id": "182625859529-rkrljlqk9ejaljhg55lfolk5isrvbg7e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.workwithafridi.mooz.mooz",
-            "certificate_hash": "facd2f33cb6c3acb062019156407b73096428ea8"
+            "certificate_hash": "ba9ec9f953026e2ecfd9a21f61269055833890ee"
           }
         },
         {

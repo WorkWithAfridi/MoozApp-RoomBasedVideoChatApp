@@ -62,27 +62,31 @@ class _AgoraRoomState extends State<AgoraRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            agoraBloc.add(
-              AgoraCloseRoomEvent(
-                userModel: authBloc.state.user,
-                roomModel: widget.roomModel,
-              ),
-            );
-          },
-          icon: const Icon(
-            Icons.close,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              agoraBloc.add(
+                AgoraCloseRoomEvent(
+                  userModel: authBloc.state.user,
+                  roomModel: widget.roomModel,
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.close,
+            ),
           ),
-        ),
-        title: Text(
-          widget.roomModel.roomName,
-          style: const TextStyle(
-            fontSize: 14,
+          title: Text(
+            widget.roomModel.roomName,
+            style: const TextStyle(
+              fontSize: 14,
+            ),
           ),
         ),
       ),
+      backgroundColor: Colors.white,
       body: BlocListener<AgoraBloc, AgoraState>(
         listener: (agoraContext, state) {
           if (state is AgoraRoomClosed) {
@@ -105,46 +109,51 @@ class _AgoraRoomState extends State<AgoraRoom> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              SizedBox(
-                height: getHeight(context: context),
-                width: getWidth(context: context),
-                child: AgoraVideoViewer(
-                  layoutType: Layout.oneToOne,
-                  client: agoraClient,
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: SizedBox(
+                  height: kToolbarHeight * 2.5,
+                  child: AgoraVideoButtons(
+                    client: agoraClient,
+                    verticalButtonPadding: 28,
+                    enabledButtons: const [
+                      BuiltInButtons.callEnd,
+                      BuiltInButtons.toggleMic,
+                      BuiltInButtons.switchCamera,
+                      // BuiltInButtons.toggleCamera,
+                      // BuiltInButtons.screenSharing,
+                    ],
+                  ),
                 ),
               ),
-              AgoraVideoButtons(
-                client: agoraClient,
-                enabledButtons: const [
-                  BuiltInButtons.callEnd,
-                  BuiltInButtons.toggleMic,
-                  BuiltInButtons.switchCamera,
-                  BuiltInButtons.toggleCamera,
-                  BuiltInButtons.screenSharing,
-                ],
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25),
+                    ),
+                  ),
+                  height: getHeight(context: context) - (kToolbarHeight * 2.5),
+                  width: getWidth(context: context),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25),
+                    ),
+                    child: AgoraVideoViewer(
+                      layoutType: Layout.oneToOne,
+                      client: agoraClient,
+                      showNumberOfUsers: true,
+                    ),
+                  ),
+                ),
               ),
-              Builder(
-                builder: (context) {
-                  final agoraState = context.watch<AgoraBloc>().state;
-                  if (agoraState is AgoraLeavingRoom) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Leaving room...",
-                        )
-                      ],
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              )
             ],
           ),
         ),

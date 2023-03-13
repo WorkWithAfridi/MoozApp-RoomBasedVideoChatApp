@@ -1,5 +1,5 @@
 /// Define App ID and Token
-const appId = 'e10761d09c8f407d9145d2f7ffce4504';
-const channgeId = "rooms";
+const appId = '22d90c30fbf04c0e98c65543cf654d73';
+const channgeId = "room123";
 const token =
-    "007eJxTYAi5nOVyJaZu/SNe3gtHlRdpiYQ6VLO9Z7dxvs1hOPP/6vkKDKmGBuZmhikGlskWaSYG5imWhiamKUZp5mlpyakmpgYml3i4UxoCGRnyryUwMzJAIIjPylCUn59bzMAAAOSLHfI=";
+    "007eJxTYJj2S9NkR+6hvrdzfdY96TO4u//xqXe7JOTVIsuqopJ+BNxTYEgzSzI0MUg1MzIxMTQxtTBIMkg1TjO3NDA3TU0yMUpM7TvPl9IQyMhQOHM5IyMDBIL47AxF+fm5hkbGDAwAalQiHg==";
